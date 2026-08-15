@@ -122,13 +122,34 @@ void dir_list::load(const char *p_ini)
   #define INI_TMP         "tmp_data"
   ini_read_string_file(p_ini, INI_TMP, tmp, sizeof(tmp), "/var/tmp");
 
+#ifdef __OS2__
+  /* On OS/2, absolute Unix paths from the INI (e.g. /usr/share/berusky/Graphics)
+     are unusable. Extract the last path component and make it relative. */
+  {
+    char *dirs[] = { levels, gamedata, graphics, levels_user };
+    int ndirs = (int)(sizeof(dirs)/sizeof(dirs[0]));
+    for (int i = 0; i < ndirs; i++) {
+      if (dirs[i][0] == '/') {
+        const char *last = strrchr(dirs[i], '/');
+        if (last && last[1]) {
+          char buf[MAX_FILENAME];
+          snprintf(buf, sizeof(buf), "./%s", last + 1);
+          strncpy(dirs[i], buf, MAX_FILENAME - 1);
+          dirs[i][MAX_FILENAME - 1] = '\0';
+        }
+      }
+    }
+    strncpy(tmp, "./tmp", MAX_FILENAME - 1);
+  }
+#else
   getcwd(cwd,MAX_FILENAME);
   update_path(levels);
   update_path(gamedata);
-  update_path(graphics);  
+  update_path(graphics);
   update_path(levels_user);
   update_path(tmp);
   chdir(cwd);
+#endif
 #endif
 
 #ifdef WINDOWS
@@ -837,7 +858,7 @@ void graphics_generate(void)
   // Create black sprite for blending
   p_grf->sprite_copy(SPRITE_BLACK, FIRST_CLASSIC_LEVEL+57, TRUE);
   SDL_Surface *p_surf = ((p_grf->sprite_get(SPRITE_BLACK))->surf_get())->surf_get();
-  SDL_SetAlpha(p_surf, SDL_SRCALPHA, 150);
+  SDL_SetSurfaceAlphaMod(p_surf, 150);
 
   int i;
 

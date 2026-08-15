@@ -156,7 +156,7 @@ bool key_to_ascii(int key, char *p_char)
 // -------------------------------------------------------------------------
 bool input::key_status(int sdl_key)
 {
-  Uint8 *keystate = SDL_GetKeyState(NULL);
+  const Uint8 *keystate = SDL_GetKeyboardState(NULL);
   return(keystate[sdl_key]);
 }
 
@@ -250,23 +250,22 @@ void input::key_input(KEYTYPE key, KEYMOD modification, bool pressed)
   int        keynum = p_set->keynum;
   int        i;
 
-  SDLMod mod = SDL_GetModState();
-  
+  SDL_Keymod mod = SDL_GetModState();
+
   bool shift = mod&KMOD_SHIFT;
   bool ctrl = mod&KMOD_CTRL;
-  
-  int    numkeys;
-  byte  *keystate = SDL_GetKeyState(&numkeys);
+
+  int          numkeys;
+  const Uint8 *keystate = SDL_GetKeyboardState(&numkeys);
 
   // Update all key events regard to current keyboard state
   for(i = 0; i < keynum; i++, p_key++) {
-    assert(p_key->key < numkeys);
-    if(keystate[p_key->key] && ctrl == p_key->ctrl && shift == p_key->shift) {
-      //bprintf("p_key = %p, activated, p_key->key = %d, keystate[p_key->key] = %d",p_key,p_key->key,keystate[p_key->key]);
+    SDL_Scancode sc = SDL_GetScancodeFromKey(p_key->key);
+    if(sc != SDL_SCANCODE_UNKNOWN && sc < numkeys &&
+       keystate[sc] && ctrl == p_key->ctrl && shift == p_key->shift) {
       p_key->flag = p_key->flag|KEY_PRESSED;
     }
     else {
-      //bprintf("p_key = %p, activated, p_key->key = %d, keystate[p_key->key] = %d",p_key,p_key->key,keystate[p_key->key]);
       p_key->flag = p_key->flag&~KEY_PRESSED;
     }
   }  
@@ -292,42 +291,53 @@ void input::events_loop(LEVEL_EVENT_QUEUE *p_queue)
   while(ret) {
     switch (event.type) {
       case SDL_KEYDOWN:
-        //bprintf("SDL_KEYDOWN, sym = %d, mod = %d",event.key.keysym.sym, event.key.keysym.mod);
-        key_input(event.key.keysym.sym, event.key.keysym.mod, TRUE);
+        if(event.key.keysym.sym == SDLK_RETURN &&
+           (event.key.keysym.mod & KMOD_ALT)) {
+          p_grf->fullscreen_toggle();
+          break;
+        }
+        key_input(event.key.keysym.sym, (KEYMOD)event.key.keysym.mod, TRUE);
         break;
       case SDL_KEYUP:
-        //bprintf("SDL_KEYUP, sym = %d, mod = %d",event.key.keysym.sym, event.key.keysym.mod);
-        key_input(event.key.keysym.sym, event.key.keysym.mod, FALSE);
+        key_input(event.key.keysym.sym, (KEYMOD)event.key.keysym.mod, FALSE);
         break;
       case SDL_MOUSEMOTION:
         {
+          int lx, ly;
+          p_grf->window_to_logical(event.motion.x, event.motion.y, &lx, &ly);
           bool pressed = FALSE;
           int  i;
-          for(i = 0; i < MOUSE_BUTTONS; i++) {        
+          for(i = 0; i < MOUSE_BUTTONS; i++) {
             bool state = event.motion.state&SDL_BUTTON(i);
             if(state) {
-              mouse_input(event.motion.x, event.motion.y, BUTTON_DOWN, i);
+              mouse_input((tpos)lx, (tpos)ly, BUTTON_DOWN, i);
               pressed = TRUE;
             }
           }
           if(!pressed) {
-            mouse_input(event.motion.x, event.motion.y, BUTTON_NONE, 0);
+            mouse_input((tpos)lx, (tpos)ly, BUTTON_NONE, 0);
           }
         }
         break;
       case SDL_MOUSEBUTTONDOWN:
-        mouse_input(event.button.x, event.button.y, BUTTON_DOWN, event.button.button);
+        {
+          int lx, ly;
+          p_grf->window_to_logical(event.button.x, event.button.y, &lx, &ly);
+          mouse_input((tpos)lx, (tpos)ly, BUTTON_DOWN, event.button.button);
+        }
         break;
       case SDL_MOUSEBUTTONUP:
-        mouse_input(event.button.x, event.button.y, BUTTON_UP, event.button.button);
+        {
+          int lx, ly;
+          p_grf->window_to_logical(event.button.x, event.button.y, &lx, &ly);
+          mouse_input((tpos)lx, (tpos)ly, BUTTON_UP, event.button.button);
+        }
         break;
-      case SDL_ACTIVEEVENT:
-        if(event.active.state&SDL_APPACTIVE) {
-          if(event.active.gain) {
-            bprintf("App activated\n");
-          } else {
-            bprintf("App iconified\n");
-          }
+      case SDL_WINDOWEVENT:
+        if(event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED) {
+          bprintf("App activated\n");
+        } else if(event.window.event == SDL_WINDOWEVENT_FOCUS_LOST) {
+          bprintf("App iconified\n");
         }
         break;
       case SDL_QUIT:        
@@ -371,7 +381,7 @@ void input::mouse_input(tpos mx, tpos my, MOUSE_BUTTON_STATE state, int button)
 
   /* Process all events */
   if(!mevents.is_empty()) {  
-    Uint8 *p_keystate = SDL_GetKeyState(NULL);
+    const Uint8 *p_keystate = SDL_GetKeyboardState(NULL);
   
     MOUSE_EVENT *p_ev = reinterpret_cast<MOUSE_EVENT *>(mevents.list_get_first());
     while(p_ev) {
@@ -398,7 +408,8 @@ void input::mouse_input(tpos mx, tpos my, MOUSE_BUTTON_STATE state, int button)
       }
     
       if(p_ev->flag&MEVENT_KEY) {
-        cond_key = p_ev->mstate.key && p_keystate[p_ev->mstate.key];
+        SDL_Scancode sc = SDL_GetScancodeFromKey((SDL_Keycode)p_ev->mstate.key);
+        cond_key = p_ev->mstate.key && sc != SDL_SCANCODE_UNKNOWN && p_keystate[sc];
       }
           
       if(cond_button && cond_key && cond_area) {
@@ -488,12 +499,7 @@ void input::block(bool state)
 
 void input::key_repeat(bool state)
 {
-  if(state) {
-    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
-  }
-  else {
-    SDL_EnableKeyRepeat(0,0);
-  }
+  (void)state; // SDL2 handles key repeat automatically via SDL_KEYDOWN events
 }
 
 void input::events_wait(bool state)

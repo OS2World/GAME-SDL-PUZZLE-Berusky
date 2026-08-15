@@ -58,9 +58,22 @@
 #endif // _WIN32
 
 /*
+ * Defines for OS/2 (must come before the generic !_WIN32 block)
+ */
+#ifdef __OS2__
+#undef  WINDOWS
+#ifndef LINUX
+#define LINUX   1
+#endif
+#include <unistd.h>
+#define mkdirm(d)  mkdir(d, DEFAULT_DIR_MASK)
+#endif // __OS2__
+
+/*
  * Defines for linux
  */
 #ifndef _WIN32
+#ifndef __OS2__
 
 #undef  WINDOWS
 #ifndef LINUX
@@ -71,6 +84,7 @@
 
 #define mkdirm(d)  mkdir(d,DEFAULT_DIR_MASK)
 
+#endif // ! __OS2__
 #endif // ! _WIN32
 
 #endif // __PORTABILITY_H__

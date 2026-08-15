@@ -50,7 +50,7 @@
 #include "portability.h"
 
 #ifdef LINUX
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #endif
 
 #ifdef WINDOWS
@@ -496,6 +496,11 @@ typedef class graph_2d
   SURFACE     *p_screen_surface;
   SPRITE      *p_screen;
 
+  // SDL2 window/renderer/texture
+  SDL_Window   *sdl_window;
+  SDL_Renderer *sdl_renderer;
+  SDL_Texture  *sdl_texture;
+
   // Array of surfaces
   SPRITE_STORE store;
 
@@ -645,6 +650,20 @@ public:
 
   void fullscreen_toggle(void);
 
+  void window_to_logical(int wx, int wy, int *lx, int *ly)
+  {
+    if(!sdl_renderer) { *lx = wx; *ly = wy; return; }
+    int out_w, out_h;
+    SDL_GetRendererOutputSize(sdl_renderer, &out_w, &out_h);
+    float scale_x = (float)out_w / graphics_width;
+    float scale_y = (float)out_h / graphics_height;
+    float scale   = (scale_x < scale_y) ? scale_x : scale_y;
+    int vp_x = (int)((out_w - graphics_width  * scale) / 2);
+    int vp_y = (int)((out_h - graphics_height * scale) / 2);
+    *lx = (int)((wx - vp_x) / scale);
+    *ly = (int)((wy - vp_y) / scale);
+  }
+
   SPRITE * screen_get(void)
   {
     return(p_screen);
@@ -730,16 +749,31 @@ public:
     if(rect_last || rect_whole) {
       if(rect_last > RECT_NUM_ALERT)
         bprintf("RECT_NUM_ALERT: %d slots.", rect_last);
-      if(rect_whole) {
-        SDL_UpdateRect(p_screen_surface->surf_get(), 0, 0, 0, 0);
-        rect_whole = FALSE;
-      } else {
-        SDL_UpdateRects(p_screen_surface->surf_get(), rect_last, rects);
-        redraw_reset();
+      SDL_Surface *surf = p_screen_surface->surf_get();
+      SDL_UpdateTexture(sdl_texture, NULL, surf->pixels, surf->pitch);
+      SDL_RenderClear(sdl_renderer);
+      {
+        int out_w, out_h;
+        SDL_GetRendererOutputSize(sdl_renderer, &out_w, &out_h);
+        float sx = (float)out_w / graphics_width;
+        float sy = (float)out_h / graphics_height;
+        float sc = (sx < sy) ? sx : sy;
+        SDL_Rect dst;
+        dst.w = (int)(graphics_width  * sc);
+        dst.h = (int)(graphics_height * sc);
+        dst.x = (out_w - dst.w) / 2;
+        dst.y = (out_h - dst.h) / 2;
+        SDL_RenderCopy(sdl_renderer, sdl_texture, NULL, &dst);
       }
+      SDL_RenderPresent(sdl_renderer);
+      rect_whole = FALSE;
+      redraw_reset();
     }
-    return (TRUE);
+    return(TRUE);
   }
+
+  SDL_Window   * sdl_window_get(void)   { return sdl_window; }
+  SDL_Renderer * sdl_renderer_get(void) { return sdl_renderer; }
 
   void screen_create(int flag, int width, int height, int bpp, int fullscreen);
   void screen_destroy(void);
@@ -748,10 +782,13 @@ public:
 
   void check(void);
 
-  graph_2d(tpos dx, tpos dy, int depth, bool fullscreen) 
+  graph_2d(tpos dx, tpos dy, int depth, bool fullscreen)
     : p_screen_surface(NULL),
       p_screen(NULL),
-      store(SURFACES, SPRITES), 
+      sdl_window(NULL),
+      sdl_renderer(NULL),
+      sdl_texture(NULL),
+      store(SURFACES, SPRITES),
       rect_last(0)
   {
     /* sdl init */

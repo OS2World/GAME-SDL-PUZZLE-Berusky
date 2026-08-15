@@ -25,7 +25,7 @@
  *
  */
 #include "portability.h"
-#ifdef LINUX
+#if defined(LINUX) && !defined(__OS2__)
 #include <gtk/gtk.h>
 #endif
 #include <stdio.h>
@@ -285,7 +285,7 @@ int main(int argc, char *argv[])
   setbuf(stderr, NULL);
   srand(clock());
 
-#ifdef LINUX
+#if defined(LINUX) && !defined(__OS2__)
   gtk_parse_args(&argc, &argv);
 #endif
 

@@ -1,0 +1,53 @@
+g++ -O2 -Wall -I. -D__OS2__ -DPACKAGE_DATA_DIR=\".\" -IC:/usr/include/SDL2 -D_REENTRANT -c 2d_graph.cpp -o 2d_graph.o
+In file included from berusky.h:113,
+                 from 2d_graph.cpp:36:
+defines.h:450:44: warning: invalid suffix on literal; C++11 requires a space between literal and string macro [-Wliteral-suffix]
+  450 | #define INI_FILE_GLOBAL    PACKAGE_DATA_DIR"/berusky/"INI_FILE_NAME
+      |                                            ^
+defines.h:451:28: warning: invalid suffix on literal; C++11 requires a space between literal and string macro [-Wliteral-suffix]
+  451 | #define INI_FILE_USER      "~/.berusky/"INI_FILE_NAME
+      |                            ^
+defines.h:452:28: warning: invalid suffix on literal; C++11 requires a space between literal and string macro [-Wliteral-suffix]
+  452 | #define INI_FILE_LOCAL     "./"INI_FILE_NAME
+      |                            ^
+2d_graph.cpp: In member function 'spr_handle sprite_store::sprite_insert(surf_handle, tflag, RECT*, spr_handle)':
+2d_graph.cpp:811:45: warning: 'void* memcpy(void*, const void*, size_t)' writing to an object of non-trivially copyable type 'SPRITE' {aka 'class sprite'}; use copy-assignment or copy-initialization instead [-Wclass-memaccess]
+  811 |   memcpy(p_sprites+shandle,&tmp, sizeof(tmp));
+      |                                             ^
+In file included from berusky.h:121,
+                 from 2d_graph.cpp:36:
+2d_graph.h:271:15: note: 'SPRITE' {aka 'class sprite'} declared here
+  271 | typedef class sprite
+      |               ^~~~~~
+2d_graph.cpp: In member function 'spr_handle sprite_store::sprite_insert(SURFACE*, tflag, RECT*, spr_handle)':
+2d_graph.cpp:829:45: warning: 'void* memcpy(void*, const void*, size_t)' writing to an object of non-trivially copyable type 'SPRITE' {aka 'class sprite'}; use copy-assignment or copy-initialization instead [-Wclass-memaccess]
+  829 |   memcpy(p_sprites+shandle,&tmp, sizeof(tmp));
+      |                                             ^
+In file included from berusky.h:121,
+                 from 2d_graph.cpp:36:
+2d_graph.h:271:15: note: 'SPRITE' {aka 'class sprite'} declared here
+  271 | typedef class sprite
+      |               ^~~~~~
+2d_graph.cpp: In member function 'spr_handle sprite_store::sprite_insert(SPRITE*, int, spr_handle)':
+2d_graph.cpp:840:52: warning: 'void* memcpy(void*, const void*, size_t)' writing to an object of non-trivially copyable type 'SPRITE' {aka 'class sprite'}; use copy-assignment or copy-initialization instead [-Wclass-memaccess]
+  840 |   memcpy(p_sprites+start,p_spr,sizeof(p_spr[0])*num);
+      |                                                    ^
+In file included from berusky.h:121,
+                 from 2d_graph.cpp:36:
+2d_graph.h:271:15: note: 'SPRITE' {aka 'class sprite'} declared here
+  271 | typedef class sprite
+      |               ^~~~~~
+2d_graph.cpp: In constructor 'font::font(GRAPH_2D*)':
+2d_graph.cpp:1083:30: warning: 'void* memset(void*, int, size_t)' clearing an object of non-trivial type 'class font'; use assignment instead [-Wclass-memaccess]
+ 1083 |   memset(this,0,sizeof(*this));
+      |                              ^
+In file included from berusky.h:121,
+                 from 2d_graph.cpp:36:
+2d_graph.h:933:15: note: 'class font' declared here
+  933 | typedef class font {
+      |               ^~~~
+2d_graph.cpp: In member function 'spr_handle sprite_store::sprite_insert(const char*, spr_handle, spr_handle*)':
+2d_graph.cpp:727:10: warning: 'char* strncpy(char*, const char*, size_t)' specified bound 200 equals destination size [-Wstringop-truncation]
+  727 |   strncpy(filename, p_file, 200);
+      |   ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+g++ 2d_graph.o animation.o berusky.o berusky_gui.o data_parser.o data_parser_tables.o editor.o events.o game_logic.o graphics.o gui.o ini.o input.o level.o level_active.o level_changer.o level_game.o main.o profile.o utils.o -o berusky.exe -Zomf -Zhigh-mem -Zmap -LC:/usr/lib -lSDL2 -lSDL2_image berusky.def

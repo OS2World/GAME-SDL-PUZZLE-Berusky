@@ -233,8 +233,8 @@
 #define  K_SHIFT_MASK KMOD_SHIFT
 #define  K_CTRL_MASK  KMOD_CTRL
 
-typedef  SDLKey       KEYTYPE;
-typedef  SDLMod       KEYMOD;
+typedef  SDL_Keycode  KEYTYPE;
+typedef  SDL_Keymod   KEYMOD;
  
 
 #define  KEY_PRESSED                  0x1     // key is pressed

@@ -1,0 +1,941 @@
+** EXPERIMENTAL (HLL) ** Open Watcom Linker Version 2.0beta1 Limited Availability
+Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
+Created on:       26/08/15 10:23:24
+Executable Image: berusky.exe
+creating an OS/2 EMX executable
+
+
+                        +------------+
+                        |   Groups   |
+                        +------------+
+
+Group                           Address              Size
+=====                           =======              ====
+
+CGROUP                          0001:00000000        0004a250
+DGROUP                          0002:00000000        000295d0
+
+
+
+                        +--------------+
+                        |   Segments   |
+                        +--------------+
+
+Segment                Class          Group          Address         Size
+=======                =====          =====          =======         ====
+
+TEXT32                 CODE           CGROUP         0001:00000000   0004a250
+________TEXT           CODE           CGROUP         0001:0004a250   00000000
+DATA32                 DATA           DGROUP         0002:00000000   0000a370
+SET1__os2dll           DATA           DGROUP         0002:0000a370   00000004
+SET2__os2dll           DATA           DGROUP         0002:0000a374   00000000
+SET3__os2dll           DATA           DGROUP         0002:0000a374   00000004
+SET1___CTOR_LIST__     DATA           DGROUP         0002:0000a378   00000004
+SET2___CTOR_LIST__     DATA           DGROUP         0002:0000a37c   00000008
+SET3___CTOR_LIST__     DATA           DGROUP         0002:0000a384   00000004
+SET1___DTOR_LIST__     DATA           DGROUP         0002:0000a388   00000004
+SET2___DTOR_LIST__     DATA           DGROUP         0002:0000a38c   00000000
+SET3___DTOR_LIST__     DATA           DGROUP         0002:0000a38c   00000004
+SET1___crtinit1__      DATA           DGROUP         0002:0000a390   00000004
+SET2___crtinit1__      DATA           DGROUP         0002:0000a394   00000000
+SET3___crtinit1__      DATA           DGROUP         0002:0000a394   00000004
+SET1___crtexit1__      DATA           DGROUP         0002:0000a398   00000004
+SET2___crtexit1__      DATA           DGROUP         0002:0000a39c   00000000
+SET3___crtexit1__      DATA           DGROUP         0002:0000a39c   00000004
+SET1___eh_frame__      DATA           DGROUP         0002:0000a3a0   00000004
+SET2___eh_frame__      DATA           DGROUP         0002:0000a3a4   00000054
+SET3___eh_frame__      DATA           DGROUP         0002:0000a3f8   00000004
+SET1___eh_init__       DATA           DGROUP         0002:0000a3fc   00000004
+SET2___eh_init__       DATA           DGROUP         0002:0000a400   00000004
+SET3___eh_init__       DATA           DGROUP         0002:0000a404   00000004
+SET1___eh_term__       DATA           DGROUP         0002:0000a408   00000004
+SET2___eh_term__       DATA           DGROUP         0002:0000a40c   00000004
+SET3___eh_term__       DATA           DGROUP         0002:0000a410   00000004
+SET1___fork_parent1__  DATA           DGROUP         0002:0000a414   00000004
+SET2___fork_parent1__  DATA           DGROUP         0002:0000a418   00000000
+SET3___fork_parent1__  DATA           DGROUP         0002:0000a418   00000004
+SET1___fork_child1__   DATA           DGROUP         0002:0000a41c   00000004
+SET2___fork_child1__   DATA           DGROUP         0002:0000a420   00000000
+SET3___fork_child1__   DATA           DGROUP         0002:0000a420   00000004
+________DATA           DATA           DGROUP         0002:0000a430   00000000
+BSS32                  BSS            DGROUP         0002:0000a430   0001f1a0
+c_common               BSS            DGROUP         0002:000295d0   00000000
+________BSS            BSS            DGROUP         0002:000295d0   00000000
+STACK                  STACK          AUTO           0003:00000000   00100000
+
+
+                        +----------------+
+                        |   Memory Map   |
+                        +----------------+
+
+* = unreferenced symbol
++ = symbol only referenced locally
+
+Address        Symbol
+=======        ======
+
+Module: C:\usr\lib\crt0hi.obj(Z:\tmp\ccjLhnOj.s)
+0001:00000000* __text
+0002:00000000* __data
+0002:00000000* ___data_start
+0002:0000a430* ___bss_start
+0002:0000a370+ __os2dll
+0002:0000a378  ___CTOR_LIST__
+0002:0000a388  ___DTOR_LIST__
+0002:0000a390* ___crtinit1__
+0002:0000a398* ___crtexit1__
+0002:0000a3a0  ___eh_frame__
+0002:0000a3fc  ___eh_init__
+0002:0000a408  ___eh_term__
+0002:0000a414+ ___fork_parent1__
+0002:0000a41c+ ___fork_child1__
+Module: C:/var/temp\ldconv_2d_graph_o_11886a80846b11d0d8.obj(ldconv_2d_graph_o_11886a80846b11d0d8.obj)
+0001:00000230* __Z8getpixelP11SDL_Surfaceii
+0001:000002b0* __Z8getpixelP11SDL_SurfaceiiP3rgb
+0001:00000350* __Z8putpixelP11SDL_Surfaceiij
+0001:000003d0* __Z8putpixelP11SDL_Surfaceii3rgb
+0001:00000450* __ZN7surface4loadEPc
+0001:00000560* __ZN7surface6createEiib
+0001:00000610* __ZN7surface4copyEPS_P8SDL_Rect
+0001:00000760* __ZN7surface4freeEv
+0001:000007b0* __ZN7surfaceC2Ev
+0001:000007b0* __ZN7surfaceC1Ev
+0001:000007d0* __ZN7surfaceC2EPc
+0001:000007d0* __ZN7surfaceC1EPc
+0001:000007e0* __ZN7surfaceC2EP11SDL_Surfacei
+0001:000007e0* __ZN7surfaceC1EP11SDL_Surfacei
+0001:00000800* __ZN7surfaceC2EPS_
+0001:00000800* __ZN7surfaceC1EPS_
+0001:00000830* __ZN7surfaceC2ERS_
+0001:00000830* __ZN7surfaceC1ERS_
+0001:00000860* __ZN7surfaceC2Eiib
+0001:00000860* __ZN7surfaceC1Eiib
+0001:00000880* __ZN7surfaceC2EPS_iiii
+0001:00000880  __ZN7surfaceC1EPS_iiii
+0001:000008d0* __ZN7surfaceC2EPS_ib
+0001:000008d0* __ZN7surfaceC1EPS_ib
+0001:00000950* __ZN7surfaceD2Ev
+0001:00000950  __ZN7surfaceD1Ev
+0001:00000970* __ZN7surface8ckey_setEhhh
+0001:00000a20* __ZN7surface8ckey_setEj
+0001:00000ab0* __ZN7surface4fillEj
+0001:00000b10* __ZN7surface4fillEiiiij
+0001:00000b80  __ZN7surface4blitEPS_ii
+0001:00000c00* __ZN7surface4blitEiiiiPS_ii
+0001:00000cd0  __ZN7surface5blendEiiiij8BLEND_OP
+0001:000010e0* __ZN7surface5scaleEPS_iiiiii
+0001:00001890* __ZN7surface14content_switchEPS_
+0001:00001900* __ZN6sprite10rect_checkEv
+0001:000019e0* __ZN6sprite4loadEP7surfacejP8SDL_Rect
+0001:00001ac0* __ZN6sprite4freeEv
+0001:00001b10* __ZN6spriteC2Ev
+0001:00001b10* __ZN6spriteC1Ev
+0001:00001b30* __ZN6spriteC2EP7surfacejP8SDL_Rect
+0001:00001b30* __ZN6spriteC1EP7surfacejP8SDL_Rect
+0001:00001b40* __ZN6spriteC2ERS_
+0001:00001b40* __ZN6spriteC1ERS_
+0001:00001bb0* __ZN6spriteD2Ev
+0001:00001bb0* __ZN6spriteD1Ev
+0001:00001bf0* __ZN6sprite4fillEj
+0001:00001c80  __ZN6sprite4fillEiiiij
+0001:00001d50  __ZN6sprite4blitEPS_ii
+0001:00001ea0  __ZN6sprite4blitEiiiiPS_ii
+0001:00002030  __ZN6sprite10rect_clampEP8SDL_Rect
+0001:000021f0* __ZN12sprite_storeC2Eii
+0001:000021f0* __ZN12sprite_storeC1Eii
+0001:00002260* __ZN12sprite_storeD2Ev
+0001:00002260* __ZN12sprite_storeD1Ev
+0001:000022b0* __ZN12sprite_store15sprite_flag_setEjii
+0001:00002320* __ZN12sprite_store17sprite_flag_clearEjii
+0001:000023b0* __ZN12sprite_store13sprite_insertEijP8SDL_Recti
+0001:00002500* __ZN12sprite_store13sprite_insertEP7surfacejP8SDL_Recti
+0001:00002660* __ZN12sprite_store13sprite_insertEP6spriteii
+0001:00002750  __ZN12sprite_store13sprite_insertEPKciPi
+0001:00002f10  __ZN12sprite_store11sprite_copyEiib
+0001:00003060  __ZN12sprite_store13sprite_deleteEii
+0001:00003090* __ZN8graph_2d14screen_destroyEv
+0001:00003210* __ZN8graph_2d17screen_regenerateEv
+0001:00003460* __ZN8graph_2d13screen_createEiiiii
+0001:00003510* __ZN8graph_2d13screen_resizeEii
+0001:000035f0* __ZN8graph_2d5checkEv
+0001:000036e0  __ZN8graph_2d17fullscreen_toggleEv
+0001:00003760* __ZN17font_lookup_table4loadEPc
+0001:00003820* __ZN9font_infoC2Ev
+0001:00003820* __ZN9font_infoC1Ev
+0001:00003840* __ZN9font_infoD2Ev
+0001:00003840* __ZN9font_infoD1Ev
+0001:000038b0  __ZN9font_info4loadEiii
+0001:000039d0  __ZN9font_info4freeEv
+0001:00003a00* __ZN4fontC2EP8graph_2d
+0001:00003a00* __ZN4fontC1EP8graph_2d
+0001:00003a40* __ZN4fontD2Ev
+0001:00003a40* __ZN4fontD1Ev
+0001:00003aa0* __Z11rect_adjustP8SDL_Rectiiii
+0001:00003fa0  __ZN4font5printEPcP8SDL_Recti
+0001:00003fd0  __ZN4font5printEP8SDL_RectiiPKcz
+0001:00004050  __ZN4font5printEP8SDL_RectPKcz
+0001:000040a0  __ZN4font5printEP8SDL_RectiiiPKcz
+0001:00004120* __Z11rect_adjustP8SDL_RectS0_
+0001:000041a0  __Z14graphics_startiiib
+0001:00004310  __Z13graphics_stopv
+0002:0000a43c  __ZN6sprite3keyE
+0002:0000a450  __ZN7surface12graphics_dirE
+0002:0000a438  __ZN9font_info5p_grfE
+0002:0000a434  _p_grf
+0002:0000a430  _p_font
+0001:00000130* __Z6berrorPKcz$w$pDNbT0N0EI8clxpb2
+0001:000001c0* __Z7bprintfPKcz$w$pDNbT0N0EI8clxpb2
+Module: C:/var/temp\ldconv_animation_o_11886a80846b126930.obj(ldconv_animation_o_11886a80846b126930.obj)
+0001:00004410* __ZN20animation_repositoryC2Ev
+0001:00004410* __ZN20animation_repositoryC1Ev
+0001:00004460* __ZN20animation_repository17repository_createEi
+0001:000044f0* __ZN20animation_repository15repository_loadEPKcS1_
+0001:00004690* __ZN20animation_repository17repository_modifyEv
+0001:000047f0* __ZN20animation_repository15template_createEii
+0001:00004880* __ZN20animation_repository14template_shiftEiii
+0001:000048a0* __ZN20animation_repository23template_sprites_staticEiiii
+0001:000048e0* __ZN20animation_repository24template_sprites_dynamicEiiPiS0_
+0001:00004980* __ZN20animation_repository13template_copyEi
+0001:00004af0* __ZN20animation_repository13template_freeEi
+0001:00004ba0* __ZN20animation_repositoryD2Ev
+0001:00004ba0* __ZN20animation_repositoryD1Ev
+0001:00004bc0  __ZN20animation_repository17template_generateE10_ANIM_TYPE
+0001:00004d20* __ZN9animationC2Ev
+0001:00004d20* __ZN9animationC1Ev
+0001:00004db0* __ZN9animationD2Ev
+0001:00004db0* __ZN9animationD1Ev
+0001:00004de0* __ZN9animation4initEiiiii
+0001:00004f10  __ZN9animation14post_event_addEP11level_event
+0001:00004f90* __ZN9animation5startEv
+0001:00005050* __ZN9animation3endEP12event_stream
+0001:00005170* __ZN9animation4stopEP12event_streamPib
+0001:00005250* __ZN9animation24process_sprite_animationEP10level_game
+0001:00005830* __ZN9animation22process_move_animationEP10level_game
+0001:00005b70* __ZN9animation7processEP10level_gameP12event_streamPi
+0001:00005d90* __ZN16animation_engineC2EP10level_gameP8dir_list
+0001:00005d90  __ZN16animation_engineC1EP10level_gameP8dir_list
+0001:00005e70* __ZN16animation_engineD2Ev
+0001:00005e70  __ZN16animation_engineD1Ev
+0001:00005ea0* __ZN16animation_engine24animation_find_next_freeEv
+0001:00005f00  __ZN16animation_engine13animation_newEiiiii
+0001:00005fb0  __ZN16animation_engine17animation_processEP12event_stream
+0002:0000a570* __ZN9animation12p_repositoryE
+Module: C:/var/temp\ldconv_berusky_o_11886a80846b12ee00.obj(ldconv_berusky_o_11886a80846b12ee00.obj)
+0001:000060c0* __ZN14berusky_config17original_size_setEv
+0001:00006150* __ZN14berusky_config15double_size_setEv
+0001:000061e0  __ZN14berusky_config16game_config_loadEPKc
+0001:00006260  __ZN14berusky_config22user_level_config_loadEPKc
+0001:000062b0  __ZN14berusky_config18editor_config_loadEPKc
+0001:00006380  __ZN14berusky_config15game_screen_setEv
+0001:00006510* __ZN7beruskyC2EP15item_repositoryP8dir_list
+0001:00006510  __ZN7beruskyC1EP15item_repositoryP8dir_list
+0001:00006570* __ZN7beruskyD2Ev
+0001:00006570  __ZN7beruskyD1Ev
+0001:00006590  __ZN7berusky10level_loadEPc
+0001:000065e0  __ZN7berusky13levelset_loadEi
+0001:00006640  __ZN7berusky18levelset_is_customEv
+0001:00006650  __ZN7berusky21levelset_get_levelnumEv
+0001:00006660  __ZN7berusky19levelset_get_passwdEi
+0001:00006700  __ZN7berusky23levelset_get_difficultyEv
+0001:000067d0  __ZN7berusky17levelset_get_nameEv
+0001:000067f0* __ZN7berusky15levelset_searchEPcPiS1_
+0001:00006850  __ZN7berusky18levelset_set_levelEi
+0001:00006860  __ZN7berusky18levelset_get_levelEv
+0001:00006870  __ZN7berusky16levelset_get_setEv
+0001:00006880  __ZN7berusky16level_status_getEv
+0001:00006890  __ZN7berusky10level_playEP12event_streami
+0001:000068d0  __ZN7berusky14level_callbackEP12event_stream
+0001:000068f0  __ZN7berusky10level_stopEP12event_stream
+0001:00006940  __ZN7berusky13level_restartEP12event_stream
+0001:000069b0  __ZN7berusky13level_suspendEP12event_stream
+0001:000069c0  __ZN7berusky13level_restoreEP12event_stream
+0001:000069e0* __ZN7berusky10status_getEv
+0001:00006a10  __ZN7berusky10level_saveEv
+0001:00006a20  __ZN7berusky10level_loadEv
+0001:00006a30  __ZN7berusky14game_data_loadEv
+0002:0000a5c0  __ZN14berusky_config7new_gfxE
+0002:0000a5ac  __ZN14berusky_config17game_resolution_xE
+0002:0000a5a8  __ZN14berusky_config17game_resolution_yE
+0002:0000a5a4  __ZN14berusky_config18level_resolution_xE
+0002:0000a5a0  __ZN14berusky_config18level_resolution_yE
+0002:0000a59c  __ZN14berusky_config20level_screen_start_xE
+0002:0000a598  __ZN14berusky_config20level_screen_start_yE
+0002:0000a594  __ZN14berusky_config19editor_resolution_xE
+0002:0000a590  __ZN14berusky_config19editor_resolution_yE
+0002:0000a58c  __ZN14berusky_config21editor_screen_start_xE
+0002:0000a588  __ZN14berusky_config21editor_screen_start_yE
+0002:0000a584  __ZN14berusky_config11cell_size_xE
+0002:0000a580  __ZN14berusky_config11cell_size_yE
+0002:0000a5c4  __ZN14berusky_config8game_fpsE
+0002:0000a5b8  __ZN14berusky_config10fullscreenE
+0002:0000a5bc  __ZN14berusky_config12screen_depthE
+0002:0000a5b0  __ZN14berusky_config20double_size_questionE
+0002:0000a5b4  __ZN14berusky_config11double_sizeE
+0001:00006050* __Z7bprintfPKcz$w$zId9d1N0EI8pLxVz4
+Module: C:/var/temp\ldconv_berusky_gui_o_11886a80846b136ee8.obj(ldconv_berusky_gui_o_11886a80846b136ee8.obj)
+0001:0000b290* __ZN8game_gui13menu_settingsE11_MENU_STATEjj
+0001:00007310* __ZN8game_gui17menu_help_creditsE11_MENU_STATEjj
+0001:00007cd0* __Z19menu_background_getv
+0001:00008810* __ZN8game_gui9menu_mainE11_MENU_STATEjj
+0001:00009330* __ZN8game_gui13menu_new_gameE11_MENU_STATEjj
+0001:000093d0* __ZN8game_gui13menu_profilesE11_MENU_STATEjj
+0001:0000a930* __ZN8game_gui9menu_helpE11_MENU_STATEjj
+0001:0000e950* __ZN8game_gui15menu_help_rulesE11_MENU_STATEjj
+0001:0000f620* __ZN8game_gui14menu_help_keysE11_MENU_STATEjj
+0001:0000f700* __ZN8game_gui14menu_level_endE11_MENU_STATEjj
+0001:00010bb0* __ZN8game_gui21menu_level_end_customE11_MENU_STATEjj
+0001:000117b0* __ZN8game_gui12menu_in_gameE11_MENU_STATEjj
+0001:000117f0* __ZN8game_gui25menu_double_size_questionE11_MENU_STATEjj
+0001:00011830* __ZN8game_gui32menu_double_size_question_switchEv
+0001:00011870* __ZN8game_gui20menu_double_size_setEb
+0001:000118b0* __ZN8game_gui19player_profile_loadEv
+0001:00011940* __ZN8game_guiC2EP15item_repositoryP8dir_list
+0001:00011940  __ZN8game_guiC1EP15item_repositoryP8dir_list
+0001:00011a10* __ZN8game_gui19player_profile_saveEv
+0001:00011a60* __ZN8game_guiD2Ev
+0001:00011a60  __ZN8game_guiD1Ev
+0001:00011ad0* __ZN8game_gui16level_set_selectEi
+0001:00011b20* __ZN8game_gui12level_selectEiii
+0001:00011e60* __ZN8game_gui19menu_profile_createEj
+0001:00011e70* __ZN8game_gui19menu_profile_selectEjj
+0001:00011ea0* __ZN8game_gui24menu_settings_fullscreenEv
+0001:00011f20* __ZN8game_gui24menu_settings_doublesizeEv
+0001:00012100* __ZN8game_gui21menu_level_draw_levelEiiiiiii
+0001:000124b0* __ZN8game_gui20menu_level_draw_pipeEiii
+0001:00012500* __ZN8game_gui29menu_level_run_path_draw_lineEPKciiiiii
+0001:00012bf0* __ZN8game_gui24menu_level_run_path_drawEiiii
+0001:000166a0* __ZN8game_gui21menu_level_name_printEv
+0001:00016be0* __ZN8game_gui18menu_level_run_newE11_MENU_STATEjj
+0001:00016c30* __ZN8game_gui15level_hint_loadEii
+0001:00017370* __ZN8game_gui15menu_level_hintE11_MENU_STATEjj
+0001:000173c0* __ZN8game_gui19level_end_text_loadEi
+0001:00017450* __ZN8game_gui17menu_levelset_endE11_MENU_STATEjj
+0001:00017d50* __ZN8game_gui16credit_text_loadEv
+0001:00017db0* __ZN8game_gui9level_runEP12event_streamPc
+0001:00017ee0* __ZN8game_gui9level_runEP12event_stream
+0001:00018030* __ZN8game_gui10level_stopEP12event_streamii
+0001:000182c0* __ZN8game_gui13level_suspendEP12event_stream
+0001:00018300* __ZN8game_gui13level_restoreEP12event_stream
+0001:00018340* __ZN8game_gui13level_restartEP12event_stream
+0001:00018390* __ZN8game_gui10level_saveEP12event_stream
+0001:000185c0* __ZN8game_gui10level_loadEP12event_stream
+0001:00018810* __ZN8game_gui10run_editorEv
+0001:000188f0  __ZN8game_gui8callbackEP12event_streami
+0001:00019250* __ZN8game_gui17menu_dialog_errorEPcz
+0001:00006ba0* __Z6berrorPKcz$w$7Eyzm1N0EI8oHKUq4
+0001:00006c30* __Z7bprintfPKcz$w$7Eyzm1N0EI8oHKUq4
+Module: C:/var/temp\ldconv_data_parser_o_11886a80846b13efd0.obj(ldconv_data_parser_o_11886a80846b13efd0.obj)
+0001:00019380* __ZN11data_parser15token_translateEPcPiS1_
+0001:00019610  __ZN11data_parser11records_getEP11data_recordi
+0001:000196f0  __ZN11data_parser11get_indexesEPii
+0001:000197a0  __ZN11data_parser13get_max_indexEv
+0001:00019820  __ZN11data_parser4openEPKcS1_
+0001:00019880  __ZN11data_parser5closeEv
+0001:000198b0* __ZN11data_parserD2Ev
+0001:000198b0  __ZN11data_parserD1Ev
+0001:000192e0* __Z7bprintfPKcz$w$b85hw1N0EI8gnlBf4
+Module: C:/var/temp\ldconv_data_parser_tables_o_11886a80846b147888.obj(ldconv_data_parser_tables_o_11886a80846b147888.obj)
+0001:000198d0  __Z16get_parser_tablev
+0001:000198e0  __Z22get_parser_table_itemsv
+0002:000030e0* _parser_table
+Module: C:/var/temp\ldconv_editor_o_11886a80846b150910.obj(ldconv_editor_o_11886a80846b150910.obj)
+0001:00019ca0* __ZN10editor_gui20editor_quit_callbackEv
+0001:00019d80* __ZN13variant_panel9configureEi
+0001:0001ad40* __ZN17editor_panel_slot4drawEiibb
+0001:0001b180* __ZN12editor_panel5clearEv
+0001:0001b1d0* __ZN12editor_panel11slot_returnEiiRi
+0001:0001b2b0* __ZN12editor_panel10panel_drawEb
+0001:0001b5e0* __ZN12editor_panel12panel_scrollEiP16editor_selectionb
+0001:0001b760* __ZN12editor_panel12boundary_getEv
+0001:0001b7d0* __ZN12editor_panel24register_controls_eventsEP5input
+0001:0001bed0* __ZN12editor_panel26unregister_controls_eventsEP5input
+0001:0001bf30* __ZN12editor_panel13item_base_getEi
+0001:0001bf80* __ZN10item_panelC2Ei9DIRECTIONiiiP13variant_panel
+0001:0001bf80* __ZN10item_panelC1Ei9DIRECTIONiiiP13variant_panel
+0001:0001c0a0* __ZN19editor_layer_configC2Ev
+0001:0001c0a0* __ZN19editor_layer_configC1Ev
+0001:0001c0c0* __ZN10editor_guiD2Ev
+0001:0001c0c0  __ZN10editor_guiD1Ev
+0001:0001c120* __ZN10editor_gui11editor_initEv
+0001:0001c180* __ZN10editor_gui20panel_item_highlightEiii
+0001:0001c270* __ZN10editor_gui10panel_drawEb
+0001:0001c380* __ZN10editor_gui14selection_drawEb
+0001:0001cb20* __ZN10editor_gui12panel_scrollEii
+0001:0001cb80* __ZN10editor_gui18panel_scroll_mouseEi
+0001:0001cca0* __ZN10editor_gui28selection_cursor_draw_statusEbPcz
+0001:0001cf90* __ZN10editor_gui21selection_cursor_drawEb
+0001:0001d020* __ZN10editor_gui16side_menu_createEv
+0001:0001d5f0* __ZN10editor_gui16side_menu_removeEv
+0001:0001d660* __ZN10editor_gui14side_menu_drawEb
+0001:0001db50* __ZN10editor_gui17layer_active_drawEb
+0001:0001dd30* __ZN10editor_gui17panel_item_selectEiii
+0001:0001dfc0* __ZN10editor_gui19layer_status_createEv
+0001:0001e190* __ZN10editor_gui17layer_status_drawEb
+0001:0001e360* __ZN10editor_gui16layer_active_setEib
+0001:0001e380* __ZN10editor_gui16layer_active_getEv
+0001:0001e390* __ZN10editor_gui16layer_active_getEii
+0001:0001e400* __ZN10editor_gui4drawEb
+0001:0001e710* __ZN10editor_gui19layer_status_switchEi11LAYER_STATE
+0001:0001e7c0* __ZN10editor_gui12level_configEv
+0001:0001edd0* __ZN10editor_gui10level_moveEii
+0001:0001ede0  __ZN10editor_gui9event_addE11level_event
+0001:0001eea0* __ZN10editor_gui14level_name_getEv
+0001:0001eeb0* __ZN10editor_gui14level_name_setEPc
+0001:0001ef10* __ZN10editor_gui15help_print_lineEiRiPcS1_
+0001:0001efd0* __ZN10editor_gui9help_quitEv
+0001:0001f000* __ZN10editor_gui16level_cursor_setEii
+0001:0001f120* __ZN10editor_gui27level_item_insert_rectangleEb
+0001:0001f200* __ZN10editor_gui26level_item_clear_rectangleEb
+0001:0001f210* __ZN10editor_gui13mouse_handlerEP12event_stream11level_event
+0001:0001f700* __ZN10editor_gui17editor_fullscreenEv
+0001:0001f7c0* __ZN10editor_gui8test_guiEv
+0001:0001f7e0  __ZN10editor_gui10keyset_setEP13event_key_set
+0001:0001f7f0* __ZN10editor_gui20level_caption_updateEv
+0001:0001f830* __ZN10editor_gui16level_edited_setEv
+0001:0001f850* __ZN10editor_gui16level_edited_getEv
+0001:0001f860* __ZN10editor_gui18level_edited_clearEv
+0001:0001f880* __ZN10editor_gui10undo_storeEv
+0001:0001f8a0* __ZN14editor_console12input_redrawEv
+0001:0001fb60* __ZN14editor_console10input_stopEb
+0001:0001fbb0* __ZN10editor_gui10input_stopEb
+0001:0001fc30* __ZN10editor_gui12console_waitE11_MENU_STATEjj
+0001:0001fc70* __ZN14editor_console11input_clearEb
+0001:0001fcb0* __ZN14editor_console11input_startE10INPUT_TYPEPc
+0001:00020120* __ZN10editor_gui4helpEv
+0001:00020680* __ZN10editor_gui11input_startEMS_FvvEi10INPUT_TYPEPcz
+0001:000208e0* __ZN10editor_gui13console_inputE11_MENU_STATEjj
+0001:00020740* __ZN10editor_gui11editor_quitEb
+0001:00020800* __ZN14editor_console16input_clear_lastEb
+0001:000208b0* __ZN14editor_console14input_add_charEcb
+0001:00020980* __ZN14editor_consoleC2EP5inputiiii
+0001:00020980* __ZN14editor_consoleC1EP5inputiiii
+0001:00020a80* __ZN10editor_guiC2EP15item_repositoryP8dir_list
+0001:00020a80  __ZN10editor_guiC1EP15item_repositoryP8dir_list
+0001:00020e50* __ZN14editor_console5printEPKcz
+0001:00020ee0* __ZN10editor_gui9level_newEb
+0001:00020fc0* __ZN10editor_gui18level_new_callbackEv
+0001:00021040* __ZN10editor_gui10level_loadEPci
+0001:000211c0* __ZN10editor_gui19level_load_callbackEv
+0001:000212a0* __ZN10editor_gui13level_save_asEPci
+0001:00021460* __ZN10editor_gui22level_save_as_callbackEv
+0001:000214f0* __ZN10editor_gui10level_saveEi
+0001:00022930* __ZN10editor_gui17level_item_insertEv
+0001:000229d0* __ZN10editor_gui17level_item_rotateE11CHANGE_TYPEi
+0001:00022c70* __ZN10editor_gui18level_item_variateE11CHANGE_TYPEi
+0001:000248a0* __ZN10editor_gui16level_item_clearEv
+0001:000248e0* __ZN10editor_gui16selection_rotateEi
+0001:00024990* __ZN10editor_gui16selection_pickupEv
+0001:00024da0* __ZN10editor_gui16editor_run_levelEv
+0001:00024f20* __ZN10editor_gui13editor_shaderEiiii
+0001:00026b10* __ZN10editor_gui13editor_shaderEv
+0001:00026b60* __ZN10editor_gui22level_change_backgroudEv
+0001:00026bd0* __ZN10editor_gui4testEv
+0001:00026c10* __ZN10editor_gui12undo_restoreEv
+0001:00026c90  __ZN10editor_gui13event_handlerEv
+0001:00027660* __ZN14editor_console12output_clearEb
+0001:000276b0* __ZN14editor_console13output_redrawEb
+0001:000276e0* __ZN14editor_console15output_draw_setEb
+0002:0000524c* __ZN14editor_console11boolean_yesE
+0002:00005248* __ZN14editor_console10boolean_noE
+0002:00027ce4* __ZN12editor_panel6p_repoE
+0002:00027ce0* __ZN17editor_panel_slot6p_repoE
+0001:000198f0* __ZN12editor_panel9configureEi$w$j68GP1N0EI84y9512
+0001:0001a210* __Z7bprintfPKcz$w$j68GP1N0EI84y9512
+0001:0001a2d0* __ZN6screen11set_changesEiii$w$j68GP1N0EI84y9512
+0001:0001a5a0* __ZN13level_generic19cell_graphics_resetEiii$w$j68GP1N0EI84y9512
+0001:0001aa80* __ZN13level_generic19cell_subitems_resetEiiib$w$j68GP1N0EI84y9512
+0001:0001b480* __ZN12editor_panel9panel_setEiP16editor_selectionbb$w$j68GP1N0EI84y9512
+0001:00027744* __ZTV10item_panel$w$j68GP1N0EI84y9512
+0001:00027750* __ZTV13variant_panel$w$j68GP1N0EI84y9512
+0001:000276f4* __ZTS12editor_panel$w$j68GP1N0EI84y9512
+0001:00027704* __ZTI12editor_panel$w$j68GP1N0EI84y9512
+0001:0002770c* __ZTS13variant_panel$w$j68GP1N0EI84y9512
+0001:0002771c* __ZTI13variant_panel$w$j68GP1N0EI84y9512
+0001:00027728* __ZTS10item_panel$w$j68GP1N0EI84y9512
+0001:00027738* __ZTI10item_panel$w$j68GP1N0EI84y9512
+Module: C:/var/temp\ldconv_events_o_11886a80846b1595b0.obj(ldconv_events_o_11886a80846b1595b0.obj)
+0001:000277b0* __ZN11level_event15translate_eventE10EVENT_TYPE
+0001:00027950* __ZN11level_event14translate_testEv
+0001:00027ba0  __ZN12event_stream8testcaseEv
+0002:00006d60* __ZN11level_event17translation_tableE
+Module: C:/var/temp\ldconv_game_logic_o_11886a80846b162638.obj(ldconv_game_logic_o_11886a80846b162638.obj)
+0001:000288f0* __ZN10game_logic11player_moveEP11level_eventiiiiibi
+0001:00028c70* __ZN10game_logic9item_moveEP11level_eventiiiiibi
+0001:00028d80* __ZN10game_logic10item_blastEP11level_eventiiii
+0001:00028df0* __ZN10game_logic10item_eraseEP11level_eventiiibi
+0001:00028ef0* __ZN10game_logic8item_setEP11level_eventiiiibb
+0001:00028f60* __ZN10game_logic18item_variation_setEP11level_eventiiiibb
+0001:00028fd0* __ZN10game_logic13anim_generateEP11level_event10_ANIM_TYPEiii
+0001:00029010* __ZN10game_logic12exit_animateEP11level_eventiiii
+0001:00029090* __ZN10game_logic17player_move_checkEP12event_streamP11level_event
+0001:0002b460* __ZN10game_logic13player_switchEP11level_event
+0001:0002b480  __ZN10game_logic14events_processEP12event_stream
+0001:0002b610* __ZN10game_logic9exit_findEbPiS0_
+Module: C:/var/temp\ldconv_graphics_o_11886a80846b169f50.obj(ldconv_graphics_o_11886a80846b169f50.obj)
+0001:0002b8c0* __ZN6screen4drawEv
+0001:0002c650  __ZN6screen4flipEv
+0001:0002c710* __ZN13screen_editorC2Eii
+0001:0002c710  __ZN13screen_editorC1Eii
+0001:0002c8a0* __ZN13screen_editor23coord_in_level_shadowedEii
+0001:0002c910  __ZN13screen_editor10set_layersEP12layer_config
+0001:0002c930  __ZN13screen_editor14selection_drawEb
+0001:0002d710* __ZN13screen_editor18inactive_area_drawEii
+0001:0002d7c0* __ZN13screen_editor16back_draw_editorEiib
+0001:0002d930* __ZN13screen_editor4drawEv
+0001:0002b6e0* __ZN6screenD1Ev$w$xF4lj2N0EI8JINbp3
+0001:0002b6f0* __ZN6screen13coord_in_areaEii$w$xF4lj2N0EI8JINbp3
+0001:0002b730* __ZN13screen_editorD1Ev$w$xF4lj2N0EI8JINbp3
+0001:0002b740* __ZN6screenD0Ev$w$xF4lj2N0EI8JINbp3
+0001:0002b760* __ZN13screen_editorD0Ev$w$xF4lj2N0EI8JINbp3
+0001:0002b780* __ZN13screen_editor13coord_in_areaEii$w$xF4lj2N0EI8JINbp3
+0001:0002c5c0* __Z7bprintfPKcz$w$xF4lj2N0EI8JINbp3
+0001:0002e474* __ZTV13screen_editor$w$xF4lj2N0EI8JINbp3
+0001:0002e430* __ZTS6screen$w$xF4lj2N0EI8JINbp3
+0001:0002e438* __ZTI6screen$w$xF4lj2N0EI8JINbp3
+0001:0002e440* __ZTS13screen_editor$w$xF4lj2N0EI8JINbp3
+0001:0002e450* __ZTI13screen_editor$w$xF4lj2N0EI8JINbp3
+0001:0002e45c* __ZTV6screen$w$xF4lj2N0EI8JINbp3
+Module: C:/var/temp\ldconv_gui_o_11886a80846b172fd8.obj(ldconv_gui_o_11886a80846b172fd8.obj)
+0001:0002e490* __ZN8gui_base10menu_dummyE11_MENU_STATEjj
+0001:0002e580  __ZN8gui_baseC2Ev
+0001:0002e580* __ZN8gui_baseC1Ev
+0001:0002e7e0  __ZN8gui_baseD2Ev
+0001:0002e7e0* __ZN8gui_baseD1Ev
+0001:0002e830  __ZN8gui_base10menu_enterEPS_MS_Fv11_MENU_STATEjjEjj
+0001:0002e8a0  __ZN8gui_base10menu_leaveEv
+0001:0002e910  __ZN8gui_base9back_pushEv
+0001:0002ea70  __ZN8gui_base8back_popEv
+0001:0002eaf0  __ZN8gui_base17menu_item_set_posEii
+0001:0002eb10  __ZN8gui_base18menu_item_set_diffEii
+0001:0002eb30* __ZN8gui_base17menu_item_set_addEii
+0001:0002eb50  __ZN8gui_base15menu_item_startEv
+0001:0002eb60  __ZN8gui_base25menu_item_draw_sprite_setEiiii
+0001:0002ec00* __ZN8gui_base21menu_item_draw_spriteEPc10_MENU_TYPEi11level_eventS2_S2_
+0001:00031510  __ZN8gui_base21menu_item_draw_spriteEiiPc10_MENU_TYPEi11level_eventS2_S2_
+0001:00031600  __ZN8gui_base19menu_item_draw_textEPc10_MENU_TYPEi11level_eventS2_S2_
+0001:00031f70  __ZN8gui_base19menu_item_draw_textEiiPc10_MENU_TYPEi11level_eventS2_S2_
+0001:00032060  __ZN8gui_base14menu_item_drawEPc10_MENU_TYPEi11level_eventS2_S2_
+0001:00032150  __ZN8gui_base14menu_item_drawEiiPc10_MENU_TYPEi11level_eventS2_S2_
+0001:00032240  __ZN8gui_base23menu_item_draw_checkboxEPc10_MENU_TYPEbii11level_eventS2_S2_
+0001:000333c0  __ZN8gui_base13menu_servicesEP12event_streamS1_11level_event
+0001:00033ae0  __ZN8gui_base16window_set_titleEPcz
+0001:0002e510* __Z7bprintfPKcz$w$7IMjt2N0EI8ERIXg2
+Module: C:/var/temp\ldconv_ini_o_11886a80846b17c830.obj(ldconv_ini_o_11886a80846b17c830.obj)
+0001:00033b30* __Z22ini_remove_end_of_linePc
+0001:00033b60* __Z15ini_skip_spacesPc
+0001:00033b90* __Z18ini_skip_separatorPc
+0001:00033be0* __Z14ini_read_paramPcS_i
+0001:00033c40* __Z8is_tokenPcPKc
+0001:00033cc0* __Z15ini_read_string7fhandlePKcPciS1_
+0001:00033dd0  __Z20ini_read_string_filePKcS0_PciS0_
+0001:00033f10* __Z12ini_read_int7fhandlePci
+0001:00033fc0  __Z17ini_read_int_filePKcS0_i
+0001:000340c0* __Z13ini_read_bool7fhandlePKci
+0001:00034190  __Z18ini_read_bool_filePKcS0_i
+0001:00034280* __Z10read_token7fhandlePcjc
+0001:00034310* __Z14ini_find_token7fhandlePKcPlS2_
+0001:000343d0* __Z16ini_write_string7fhandleS_PKcS1_
+0001:000344f0  __Z16ini_write_stringPKcS0_S0_
+Module: C:/var/temp\ldconv_input_o_11886a80846b1858b8.obj(ldconv_input_o_11886a80846b1858b8.obj)
+0001:000349f0  __Z12key_to_asciiiPc
+0001:00034a10* __ZN5input10key_statusEi
+0001:00034a30  __ZN5input10keyset_setEP13event_key_set
+0001:00034a60* __ZN5input9key_blockEib
+0001:00034a90* __ZN5input7key_addEP12event_stream
+0001:00034ca0* __ZN5input11events_gameEP12event_stream
+0001:00034e20* __ZN5input9key_inputEi10SDL_Keymodb
+0001:00034fa0  __ZN5input11events_loopEP12event_stream
+0001:00035680* __ZN5input11mouse_inputEii18MOUSE_BUTTON_STATEi
+0001:000356c0* __ZN5input18mevent_state_clearEP11mouse_event
+0001:000356f0  __ZN5input12mevent_clearEv
+0001:00035740  __ZN5input10mevent_addEP11mouse_eventi
+0001:000358b0  __ZN5input10mevent_addE11mouse_event
+0001:000358f0  __ZN5input13mevent_removeEP11mouse_eventi
+0001:00035990  __ZN5input5blockEb
+0001:000359b0  __ZN5input10key_repeatEb
+0001:000359c0  __ZN5input11events_waitEb
+0002:00007cd0  _editor_keys
+0002:00007cd8  _menu_keys
+0002:00007ce0  _suspend_keys
+0002:00007ce8  _game_keys
+0002:00028d70* _game_key_array
+0002:00028bd0* _suspend_key_array
+0002:00028a30* _menu_key_array
+0002:00028030* _editor_key_array
+0001:00034980* __Z7bprintfPKcz$w$jUzPN2N0EI8zncKa0
+Module: C:/var/temp\ldconv_level_o_11886a80846b18d9a0.obj(ldconv_level_o_11886a80846b18d9a0.obj)
+0001:00038ee0* __ZN15item_repository6createEPii
+0001:00038fe0  __ZN15item_repository4loadEPKcS1_S1_
+0001:00039300* __ZN11game_object4dumpEv
+0002:00008024  __ZN15item_repository18item_desc_rotationE
+0002:00008050  __ZN15item_repository14item_desc_nameE
+0001:00038e40* __Z7bprintfPKcz$w$lhJYW2N0EI8GpnqC1
+Module: C:/var/temp\ldconv_level_active_o_11886a80846b195e70.obj(ldconv_level_active_o_11886a80846b195e70.obj)
+0001:00039660* __ZN11level_store5allocEi
+0001:00039680  __ZN11level_store4freeEv
+0001:000396b0  __ZN11level_store10level_loadEP8dir_listPc
+0001:00039710* __ZN11level_store13is_valid_lineEPc
+0001:00039780* __ZN11level_store9is_subdirEPcS0_
+0001:00039840  __ZN11level_store13levelset_loadEP8dir_listPc
+0001:00039c00  __ZN11level_store15levelset_searchEPcPi
+0001:00039c70  __ZN11level_store19levelset_get_passwdEi
+0001:00039ca0  __ZN11level_store17levelset_get_nameEi
+0001:00039cd0* __ZN11level_store24levelset_get_name_customEv
+0001:00039cf0* __ZN11level_store17levelset_is_levelEi
+0001:00039d10  __ZN11level_store21levelset_get_levelnumEv
+0001:00039d20  __ZN11level_store10status_getEv
+0001:00039d30  __ZN11level_store6redrawEv
+0001:00039ed0* __ZN12level_active16add_level_eventsEP12event_stream
+0001:0003a0a0* __ZN12level_activeC2EP12event_streamP15item_repositoryP12level_statusP8dir_listPc
+0001:0003a0a0* __ZN12level_activeC1EP12event_streamP15item_repositoryP12level_statusP8dir_listPc
+0001:0003a330  __ZN11level_store10play_startEP15item_repositoryP12event_streami
+0001:0003a410* __ZN12level_activeD2Ev
+0001:0003a410* __ZN12level_activeD1Ev
+0001:0003a470  __ZN11level_store8play_endEP12event_stream
+0001:0003a4e0* __ZN12level_active10level_saveEv
+0001:0003a570  __ZN11level_store10level_saveEv
+0001:0003a590* __ZN12level_active10level_loadEv
+0001:0003a5e0  __ZN11level_store10level_loadEv
+0001:0003a5f0* __ZN12level_active13play_callbackEP12event_stream
+0001:0003a680  __ZN11level_store13play_callbackEP12event_stream
+0001:000395f0* __Z7bprintfPKcz$w$nES763N0EI8VVP8k4
+0002:000294f0* __ZZN10level_game23low_panel_steps_changedEvE10last_steps$w$nES763N0EI8VVP8k4
+Module: C:/var/temp\ldconv_level_changer_o_11886a80846b19d788.obj(ldconv_level_changer_o_11886a80846b19d788.obj)
+0001:0003b240  __ZN13level_changer14events_processEP12event_stream
+0001:0003a730* __ZN6screen11set_changesEiii$w$Lg8nl3N0EI8HzvFa1
+0001:0003aa10* __ZN13level_generic19cell_subitems_resetEiiib$w$Lg8nl3N0EI8HzvFa1
+Module: C:/var/temp\ldconv_level_game_o_11886a80846b1ac9b8.obj(ldconv_level_game_o_11886a80846b1ac9b8.obj)
+0001:0003e5b0* __ZN6player12set_graphicsEi
+0001:0003e720  __ZN13level_genericC2EP15item_repository
+0001:0003e720* __ZN13level_genericC1EP15item_repository
+0001:0003e7d0  __ZN13level_genericD2Ev
+0001:0003e7d0* __ZN13level_genericD1Ev
+0001:0003e7e0  __ZN13level_generic20level_background_setEi
+0001:0003e950  __ZN13level_generic12level_existsEPKc
+0001:0003e980* __ZN13level_generic12level_importEP10LEVEL_DISK
+0001:00040500* __ZN13level_generic10level_loadEPKc
+0001:00040860  __ZN13level_generic10level_loadEPKcPS1_i
+0001:00040920* __ZN13level_generic11level_clearEv
+0001:00041e20  __ZN13level_generic9level_newEv
+0001:00041e50* __ZN13level_generic12level_exportEP10LEVEL_DISK
+0001:00041fb0  __ZN13level_generic10level_saveEPKc
+0001:00042000* __ZN10level_gameC2EP6screenP15item_repositoryP12level_status
+0001:00042000  __ZN10level_gameC1EP6screenP15item_repositoryP12level_status
+0001:00042050* __ZN10level_gameD2Ev
+0001:00042050  __ZN10level_gameD1Ev
+0001:00042090  __ZN10level_game21top_panel_player_drawEib
+0001:00042350  __ZN10level_game19top_panel_keys_drawEb
+0001:000424c0  __ZN10level_game14top_panel_drawEb
+0001:00042620  __ZN10level_game19low_panel_draw_mattEb
+0001:00042810  __ZN10level_game13player_switchEi
+0001:00042a60  __ZN10level_game20low_panel_draw_stepsEb
+0001:00042bc0  __ZN10level_game14level_populateEv
+0001:00043400* __ZN12level_editor14level_populateEv
+0001:00043920  __ZN12level_editor10level_drawEv
+0001:00043940  __ZN12level_editor10level_moveEii
+0001:00043ae0* __ZN12level_editor16import_from_coreEP10level_core
+0001:000441e0* __ZN12level_editor14export_to_coreEP10level_core
+0001:000442a0  __ZN12level_editor9core_pushEv
+0001:000443c0  __ZN12level_editor8core_popEv
+0001:00044420* __ZN12level_editor14tmp_core_storeEv
+0001:00044450* __ZN12level_editor16tmp_core_restoreEv
+0001:0003d930* __Z7bprintfPKcz$w$TYobw3N0EI8ABfd81
+0001:0003d9b0* __ZN6screen9back_loadEi$w$TYobw3N0EI8ABfd81
+0001:0003db30* __ZN6screen11set_changesEiii$w$TYobw3N0EI8ABfd81
+0001:0003de10* __ZN13level_generic19cell_subitems_resetEiiib$w$TYobw3N0EI8ABfd81
+Module: C:/var/temp\ldconv_main_o_11886a80846b1b5270.obj(ldconv_main_o_11886a80846b1b5270.obj)
+0001:000448f0* __Z9time_leftv
+0001:00044a10* __Z6bannerv
+0001:00044b00* __Z4helpb
+0001:00044b60* __Z3endP8dir_list
+0001:00044c50  __Z11config_fileb
+0001:00044d20* __Z15start_logo_draw9game_mode
+0001:00044f00* __Z19start_logo_progressi
+0001:00044f90* __Z15repository_loadP15item_repositoryP8dir_list
+0001:00045000* __Z8run_game9game_modePcP8dir_list
+0001:000454b0* __Z10run_editor9game_modePcP8dir_list
+0001:000456e0  _main
+0001:000444c0* __Z6berrorPKcz$w$ZzirG3N0EI851gzP2
+0001:00044550* __Z7bprintfPKcz$w$ZzirG3N0EI851gzP2
+0001:000447e0* __Z9bprintfnlPKcz$w$ZzirG3N0EI851gzP2
+0001:00044850* __ZN12event_stream3addE11level_eventb$w$ZzirG3N0EI851gzP2
+0001:000456e0* main
+Module: C:/var/temp\ldconv_profile_o_11886a80846b1bdf10.obj(ldconv_profile_o_11886a80846b1bdf10.obj)
+0001:000458d0  __ZN15berusky_profile18selected_level_setEi
+0001:00045900  __ZN15berusky_profile18selected_level_getEv
+0001:00045920* __ZN15berusky_profile14last_level_setEi
+0001:00045940  __ZN15berusky_profile14last_level_getEv
+0001:000459a0  __ZN15berusky_profile13level_set_setEi
+0001:00045a00  __ZN15berusky_profile13level_set_getEv
+0001:00045a30* __ZN15berusky_profile4loadEPKcS1_
+0001:00045bd0  __ZN15berusky_profile4saveEv
+0001:00045ca0  __ZN15berusky_profile23selected_level_finishedEv
+0001:00045ce0  __ZN15berusky_profile6createEPKc
+0001:00045d70* __ZN15berusky_profileC2Ev
+0001:00045d70  __ZN15berusky_profileC1Ev
+0001:00045da0  __Z13profiles_loadPP15berusky_profilePi
+0001:00045ec0  __Z17profile_load_lastPcR15berusky_profile
+Module: C:/var/temp\ldconv_utils_o_11886a80846b1c5ff8.obj(ldconv_utils_o_11886a80846b1c5ff8.obj)
+0001:000461c0* __Z9log_closev
+0001:000461f0* __Z9log_flushv
+0001:00046320  __ZN8dir_list4loadEPKc
+0001:000465a0  __Z14get_fullscreenPKc
+0001:000465e0  __Z14get_doublesizePKc
+0001:00046630  __Z23get_doublesize_questionPKc
+0001:00046670  __Z10get_colorsPKci
+0001:000466a0* __Z7my_itoaiPci
+0001:00046750  __Z14set_fullscreenPKcb
+0001:00046790  __Z14set_doublesizePKcb
+0001:000467e0  __Z23set_doublesize_questionPKcb
+0001:00046820* __Z10file_close7fhandle
+0001:00046840* __Z9file_load7fhandlePcjj
+0001:000468b0* __Z14file_load_text7fhandlePcjj
+0001:00046940  __Z9file_copy7fhandleS_i
+0001:00046a40* __Z13file_size_get7fhandle
+0001:00046ab0* __Z11print_errnob
+0001:00046b20* __Z12dir_home_getPci
+0001:00046bc0  __Z11return_pathPKcS0_Pci
+0001:00046cd0* __ZN8dir_list11update_pathEPc
+0001:00046d70  __Z9file_openPKcS0_S0_b
+0001:00046e70* __Z8log_openPKc
+0001:00046f10  __Z12log_open_iniPKc
+0001:00046f90  __Z9file_loadPKcS0_Pcjjb
+0001:00046fe0  __Z14file_load_textPKcS0_Pcjjb
+0001:00047030* __Z9file_loadPKcS0_Pjjb
+0001:00047110  __Z9file_savePKcS0_PvjS0_
+0001:00047180* __Z9file_copyPKcS0_S0_S0_b
+0001:00047230  __Z11file_existsPKcS0_
+0001:00047270* __Z13file_size_getPKcS0_
+0001:000472e0* __Z10dir_createPKc
+0001:000473d0  __Z13file_list_getPKcS0_PP16_DIRECTORY_ENTRY
+0001:000474e0  __Z19graphics_logos_loadP8dir_list
+0001:00047560  __Z19graphics_logos_freev
+0001:00047590  __Z18graphics_game_freev
+0001:00047950  __Z18graphics_menu_loadP8dir_list
+0001:00047e30  __Z18graphics_menu_freev
+0001:00047f10  __Z14background_numP8dir_list
+0001:00047fe0* __Z23graphics_generate_floorii
+0001:000483e0* __Z17graphics_generatev
+0001:00048b30  __Z18graphics_game_loadP8dir_list
+0001:00049420  __Z21user_directory_createv
+0002:00029540  _log_file
+0001:00046060* __Z6berrorPKcz$w$xLpsY3N0EI85Fsua1
+0001:000460f0* __Z7bprintfPKcz$w$xLpsY3N0EI85Fsua1
+0001:00046160* __Z9bprintfnlPKcz$w$xLpsY3N0EI85Fsua1
+Module: C:\usr\lib\libend.lib(src/libend/386/endlink386.asm)
+0002:000295d0  _end
+0002:0000a430  _edata
+Module: C:\usr\lib\libend.lib(src/libend/386/end.asm)
+0001:0004a250* _etext
+0001:0004a250* __etext
+0000:00000000* WEAK$ZERO
+0002:000295d0  __end
+0002:0000a430  __edata
+Module: C:\usr\lib\libc_dll.lib(syslog.obj)
+0001:00049658* _vsyslog
+0001:00049a78  _syslog
+0001:00049a99* _openlog
+0001:00049bc8* _closelog
+0001:00049bfc* _setlogmask
+Module: C:\usr\lib\gcc\i686-pc-os2-emx\9\libgcc_so_d.lib(emx-eh.obj)
+0001:00049c20  ___ehInit
+0001:00049c5c* ___ehTerm
+Module: C:\usr\lib\gcc\i686-pc-os2-emx\9\libgcc_so_d.lib(__main.obj)
+0001:00049ca0* ___do_global_dtors
+0001:00049ca5* ___do_global_ctors
+0001:00049cbe  ___main
+Module: C:\usr\lib\libc_dll.lib(socket.obj)
+0001:00049cf0  _socket
+Module: C:\usr\lib\libc_dll.lib(connect.obj)
+0001:00049d80  _connect
+Module: C:\usr\lib\libc_dll.lib(send.obj)
+0001:00049e70  _send
+Module: C:\usr\lib\gcc\i686-pc-os2-emx\9\libgcc_so_d.lib(emx-ctordtor.obj)
+0001:00049f30  ___ctordtorInit
+0001:00049f64  ___ctordtorTerm
+Module: C:\usr\lib\libc_dll.lib(highmemsocket.obj)
+0001:00049fcc* ___libsocket_safe_copy
+0001:0004a081  ___libsocket_safe_addr_pre
+0001:0004a18c* ___libsocket_safe_addr_post
+0001:0004a235  ___libsocket_safe_addr_free
+
+
+                        +----------------------+
+                        |   Imported Symbols   |
+                        +----------------------+
+
+Symbol                              Module
+======                              ======
+
+___libc_ForkRegisterModule          libcn0
+___init_app                         libcn0
+__CRT_init                          libcn0
+__atfork_callback                   libcn0
+__assert                            libcn0
+___stderrp                          libcn0
+_SDL_GetRGB                         SDL2200
+_SDL_MapRGB                         SDL2200
+_IMG_Load                           SDL2I200
+_SDL_ConvertSurfaceFormat           SDL2200
+_SDL_FreeSurface                    SDL2200
+_SDL_CreateRGBSurface               SDL2200
+_SDL_UpperBlit                      SDL2200
+_SDL_ConvertSurface                 SDL2200
+_SDL_SetColorKey                    SDL2200
+_SDL_FillRect                       SDL2200
+_SDL_LockSurface                    SDL2200
+_SDL_UnlockSurface                  SDL2200
+_SDL_GetError                       SDL2200
+__Unwind_Resume                     gcc1
+__ZdlPvj                            stdcpp6
+__Znwj                              stdcpp6
+_SDL_DestroyTexture                 SDL2200
+_SDL_DestroyRenderer                SDL2200
+_SDL_DestroyWindow                  SDL2200
+_SDL_CreateWindow                   SDL2200
+_SDL_CreateRenderer                 SDL2200
+_SDL_CreateTexture                  SDL2200
+_SDL_QuitSubSystem                  SDL2200
+_SDL_InitSubSystem                  SDL2200
+_SDL_SetWindowFullscreen            SDL2200
+_SDL_SetWindowPosition              SDL2200
+_tolower                            libcn0
+_toupper                            libcn0
+_SDL_Init                           SDL2200
+_SDL_Quit                           SDL2200
+___gxx_personality_v0               stdcpp6
+__ZdaPv                             stdcpp6
+_SDL_UpdateTexture                  SDL2200
+_SDL_RenderCopy                     SDL2200
+_SDL_RenderPresent                  SDL2200
+_SDL_GetTicks                       SDL2200
+_SDL_Delay                          SDL2200
+__errno                             libcn0
+___cxa_guard_acquire                stdcpp6
+___cxa_guard_release                stdcpp6
+___cxa_guard_abort                  stdcpp6
+_isblank                            libcn0
+__ZTVN10__cxxabiv117__class_type_infoE stdcpp6
+__ZTVN10__cxxabiv120__si_class_type_infoE stdcpp6
+__Znaj                              stdcpp6
+___cxa_throw_bad_array_new_length   stdcpp6
+_SDL_SetWindowTitle                 SDL2200
+_SDL_GetKeyboardState               SDL2200
+_SDL_GetScancodeFromKey             SDL2200
+_SDL_PumpEvents                     SDL2200
+_SDL_GetModState                    SDL2200
+_SDL_WaitEvent                      SDL2200
+_SDL_PollEvent                      SDL2200
+_SDL_GetRendererOutputSize          SDL2200
+_isspace                            libcn0
+___chkstk_ms                        gcc1
+___stdoutp                          libcn0
+_SDL_SetSurfaceAlphaMod             SDL2200
+__std_exit                          libcn0
+__std_fcntl                         libcn0
+__std_memset                        libcn0
+__std_close                         libcn0
+__std_time                          libcn0
+__std_sprintf                       libcn0
+__std_ctime_r                       libcn0
+__std_strstr                        libcn0
+__std_vsnprintf                     libcn0
+__std_open                          libcn0
+__std_strchr                        libcn0
+__std_writev                        libcn0
+__getprogname                       libcn0
+__std_getpid                        libcn0
+__std_strerror                      libcn0
+__std_fprintf                       libcn0
+__std_rand                          libcn0
+__std_calloc                        libcn0
+__std_free                          libcn0
+__std_memcpy                        libcn0
+__std_strncpy                       libcn0
+__std_fgets                         libcn0
+__std_sscanf                        libcn0
+__std_fclose                        libcn0
+__std_strdup                        libcn0
+___register_frame_table             gcc1
+___deregister_frame                 gcc1
+__std_random                        libcn0
+__std_srand                         libcn0
+__std_snprintf                      libcn0
+__std_atoi                          libcn0
+__std_strlen                        libcn0
+__std_fork                          libcn0
+__std_execlp                        libcn0
+__std_waitpid                       libcn0
+__std_atexit                        libcn0
+__std_strcmp                        libcn0
+__std_feof                          libcn0
+__std_rewind                        libcn0
+__std_fseek                         libcn0
+__std_strcpy                        libcn0
+__std_fgetc                         libcn0
+__std_ftell                         libcn0
+__std_tmpfile                       libcn0
+__std_malloc                        libcn0
+__std_strncat                       libcn0
+__std_strnicmp                      libcn0
+__std_memcmp                        libcn0
+__std_fputs                         libcn0
+__std_printf                        libcn0
+__std_puts                          libcn0
+__std_setbuf                        libcn0
+__std_clock                         libcn0
+__std_mktemp                        libcn0
+__std_strncmp                       libcn0
+__std_fnmatch                       libcn0
+__std_fflush                        libcn0
+__std_strrchr                       libcn0
+__std_fread                         libcn0
+__std_fwrite                        libcn0
+__std_getenv                        libcn0
+__std_chdir                         libcn0
+__std_getcwd                        libcn0
+__std_fopen                         libcn0
+__std_stat                          libcn0
+__std_mkdir                         libcn0
+__std_alphasort                     libcn0
+__std_scandir                       libcn0
+__libsocket_socket                  tcpip32
+___libc_TcpipAllocFH44              libcn0
+__libsocket_sock_errno              tcpip32
+__libsocket_soclose                 tcpip32
+__libsocket_set_errno               tcpip32
+___libc_FH                          libcn0
+__libsocket_connect                 tcpip32
+__libsocket_send                    tcpip32
+___ctordtorInit1                    libcn0
+___ctordtorTerm1                    libcn0
+DosTIB                              doscalls
+DosSetExceptionHandler              doscalls
+DosUnsetExceptionHandler            doscalls
+__lmalloc                           libcn0
+__std_longjmp                       libcn0
+__std_setjmp                        libcn0
+
+
+                        +--------------------+
+                        |   Libraries Used   |
+                        +--------------------+
+
+C:\var\temp\ldconv_SDL2_dll_a_11886a80846b1d4288.lib
+C:\var\temp\ldconv_SDL2_image_dll_a_11886a80846b1e5010.lib
+C:\usr\lib\stdc++_dll.lib
+C:\usr\lib\gcc\i686-pc-os2-emx\9\libgcc_so_d.lib
+C:\usr\lib\libc_alias.lib
+C:\usr\lib\libc_dll.lib
+C:\usr\lib\libos2.lib
+C:\usr\lib\libend.lib
+
+
+                        +-----------------------+
+                        |   Linker Statistics   |
+                        +-----------------------+
+
+Stack size:  00100000 (1048576.)
+Memory size:  00173820 (1521696.)
+Entry point address: 0001:00000000
+Link time: 00:00.35

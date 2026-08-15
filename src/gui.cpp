@@ -523,5 +523,6 @@ void gui_base::window_set_title(char *p_text,...)
   vsnprintf(title,200,p_text,arguments);
   va_end(arguments);
   
-  SDL_WM_SetCaption(title, NULL);
+  if(p_grf && p_grf->sdl_window_get())
+    SDL_SetWindowTitle(p_grf->sdl_window_get(), title);
 }

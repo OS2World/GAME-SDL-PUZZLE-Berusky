@@ -28,8 +28,8 @@
 /*
   2D Graphics library
 */
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include <math.h>
 
@@ -181,10 +181,10 @@ void surface::load(char *p_file)
   SDL_Surface *p_tmp = IMG_Load(file);
   if(p_tmp)
   {
-    p_surf = SDL_DisplayFormat(p_tmp);
+    p_surf = SDL_ConvertSurfaceFormat(p_tmp, SDL_PIXELFORMAT_RGB888, 0);
     assert(p_surf);
-    SDL_FreeSurface(p_tmp);        
-  } 
+    SDL_FreeSurface(p_tmp);
+  }
   else {
     bprintf("Unable to load %s",file);
     assert(p_tmp);
@@ -197,17 +197,12 @@ void surface::create(tpos width, tpos height, bool display_format)
 {
   assert(!p_surf);
 
-  p_surf = SDL_CreateRGBSurface(SDL_HWSURFACE, width, height, 32,0,0,0,0);
+  p_surf = SDL_CreateRGBSurface(0, width, height, 32,
+                                0x00FF0000, 0x0000FF00, 0x000000FF, 0);
   if(!p_surf) {
     berror("Unable to create surface! (%dx%d)", width, height);
   }
-
-  if(display_format) {
-    SDL_Surface *p_tmp = SDL_DisplayFormat(p_surf);
-    assert(p_tmp);
-    SDL_FreeSurface(p_surf);
-    p_surf = p_tmp;
-  }
+  (void)display_format;
 
   used = 0;
 }
@@ -222,7 +217,7 @@ void surface::copy(class surface *p_src, RECT *p_src_rect)
 
   if(p_src_rect) {
     SDL_PixelFormat *p_format = p_src->p_surf->format;
-    p_surf = SDL_CreateRGBSurface(SDL_HWSURFACE, p_src_rect->w, p_src_rect->h,
+    p_surf = SDL_CreateRGBSurface(0, p_src_rect->w, p_src_rect->h,
                                   p_format->BitsPerPixel,
                                   p_format->Rmask,
                                   p_format->Gmask,
@@ -234,7 +229,7 @@ void surface::copy(class surface *p_src, RECT *p_src_rect)
     SDL_BlitSurface(p_src->p_surf, p_src_rect, p_surf, NULL);
   }
   else {
-    p_surf = SDL_ConvertSurface(p_src->p_surf, p_src->p_surf->format, SDL_HWSURFACE);
+    p_surf = SDL_ConvertSurface(p_src->p_surf, p_src->p_surf->format, 0);
   }
   assert(p_surf);
 
@@ -305,14 +300,14 @@ surface::~surface(void)
 void surface::ckey_set(trgbcomp r, trgbcomp g, trgbcomp b)
 {
   assert(p_surf);
-  int ret = SDL_SetColorKey(p_surf, SDL_SRCCOLORKEY, SDL_MapRGB(p_surf->format, r, g, b));
+  int ret = SDL_SetColorKey(p_surf, SDL_TRUE, SDL_MapRGB(p_surf->format, r, g, b));
   assert(ret != -1);
 }
 
 void surface::ckey_set(tcolor color)
 {
   assert(p_surf);
-  int ret = SDL_SetColorKey(p_surf, SDL_SRCCOLORKEY, color);
+  int ret = SDL_SetColorKey(p_surf, SDL_TRUE, color);
   assert(ret != -1);
 }
 
@@ -877,22 +872,18 @@ void sprite_store::sprite_delete(spr_handle handle, int num)
 // -------------------------------------------------------
 void graph_2d::screen_create(int flag, int width, int height, int bpp, int fullscreen)
 {
-
   SDL_QuitSubSystem(SDL_INIT_VIDEO);
   if(SDL_InitSubSystem(SDL_INIT_VIDEO) < 0) {
     fprintf(stderr, "unable to init SDL: %s", SDL_GetError());
     exit(0);
-  }      
-        
-  sdl_video_flags = flag|SDL_HWSURFACE;
-  
-  graphics_fullscreen = fullscreen;
-  if(fullscreen)
-    sdl_video_flags |= SDL_FULLSCREEN;
+  }
 
+  (void)flag;
+  sdl_video_flags = 0;
+  graphics_fullscreen = fullscreen;
   graphics_bpp = bpp;
-  
-  screen_resize(width, height);  
+
+  screen_resize(width, height);
 }
 
 // Obtain the screen from SDL
@@ -902,15 +893,46 @@ bool graph_2d::screen_regenerate(void)
   screen_destroy();
 
   bprintf("Init video surface...\n");
-  SDL_Surface *p_hwscreen = SDL_SetVideoMode(graphics_width, graphics_height, 
-                                             graphics_bpp, sdl_video_flags);
-  
-  if(!p_hwscreen) {
-    fprintf (stderr, "Unable to set the video mode: %s", SDL_GetError());
+
+  Uint32 win_flags = 0;
+  if(graphics_fullscreen)
+    win_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+
+  /* Window display size: 1024x768 in windowed mode; fullscreen uses desktop size. */
+  int create_w = graphics_fullscreen ? graphics_width  : 1024;
+  int create_h = graphics_fullscreen ? graphics_height : 768;
+
+  sdl_window = SDL_CreateWindow("Berusky",
+                                SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_UNDEFINED,
+                                create_w, create_h, win_flags);
+  if(!sdl_window) {
+    fprintf(stderr, "Unable to create window: %s\n", SDL_GetError());
     exit(0);
   }
-   
-  p_screen_surface = new SURFACE(p_hwscreen);
+
+  sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_SOFTWARE);
+  if(!sdl_renderer) {
+    fprintf(stderr, "Unable to create renderer: %s\n", SDL_GetError());
+    exit(0);
+  }
+  sdl_texture = SDL_CreateTexture(sdl_renderer,
+                                  SDL_PIXELFORMAT_RGB888,
+                                  SDL_TEXTUREACCESS_STREAMING,
+                                  graphics_width, graphics_height);
+  if(!sdl_texture) {
+    fprintf(stderr, "Unable to create texture: %s\n", SDL_GetError());
+    exit(0);
+  }
+
+  // Software shadow surface — all game blitting targets this
+  SDL_Surface *p_shadow = SDL_CreateRGBSurface(0, graphics_width, graphics_height, 32,
+                                               0x00FF0000, 0x0000FF00, 0x000000FF, 0);
+  if(!p_shadow) {
+    fprintf(stderr, "Unable to create shadow surface: %s\n", SDL_GetError());
+    exit(0);
+  }
+
+  p_screen_surface = new SURFACE(p_shadow);
   p_screen = new SPRITE(p_screen_surface, SDL_SPRITE_SEPARATE_SURFACE, NULL);
 
   redraw_reset();
@@ -925,15 +947,21 @@ void graph_2d::screen_destroy(void)
     delete p_screen;
     p_screen = NULL;
   }
-
   if(p_screen_surface) {
     delete p_screen_surface;
     p_screen_surface = NULL;
   }
-
-  if(p_screen_surface) {
-    delete p_screen_surface;
-    p_screen_surface = NULL;
+  if(sdl_texture) {
+    SDL_DestroyTexture(sdl_texture);
+    sdl_texture = NULL;
+  }
+  if(sdl_renderer) {
+    SDL_DestroyRenderer(sdl_renderer);
+    sdl_renderer = NULL;
+  }
+  if(sdl_window) {
+    SDL_DestroyWindow(sdl_window);
+    sdl_window = NULL;
   }
 }
 
@@ -981,13 +1009,12 @@ void graph_2d::check(void)
 
 void graph_2d::fullscreen_toggle(void)
 {
-#ifdef LINUX
-  if(!SDL_WM_ToggleFullScreen(p_screen_surface->surf_get())) {
-    bprintf("SDL_WM_ToggleFullScreen() failed!");
-    return;
+  graphics_fullscreen = !graphics_fullscreen;
+  if(sdl_window) {
+    SDL_SetWindowFullscreen(sdl_window, graphics_fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+    if(!graphics_fullscreen)
+      SDL_SetWindowPosition(sdl_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
   }
-#endif  
-  graphics_fullscreen = !graphics_fullscreen;  
 }
 
 // -------------------------------------------------------

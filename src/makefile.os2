@@ -1,0 +1,24 @@
+SHELL=sh
+CXX=g++
+CXXFLAGS=-O2 -Wall -I. -D__OS2__ -DPACKAGE_DATA_DIR=\".\" \
+         $(shell sdl2-config --cflags)
+LDFLAGS=-Zomf -Zhigh-mem -Zmap $(shell sdl2-config --libs) -lSDL2_image
+
+TARGET=berusky.exe
+
+SRC=2d_graph.cpp animation.cpp berusky.cpp berusky_gui.cpp \
+    data_parser.cpp data_parser_tables.cpp editor.cpp events.cpp \
+    game_logic.cpp graphics.cpp gui.cpp ini.cpp input.cpp level.cpp \
+    level_active.cpp level_changer.cpp level_game.cpp main.cpp \
+    profile.cpp utils.cpp
+
+OBJ=$(SRC:.cpp=.o)
+
+$(TARGET): $(OBJ) berusky.def
+	$(CXX) $(OBJ) -o $(TARGET) $(LDFLAGS) berusky.def
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ) berusky.exe berusky.map

@@ -50,11 +50,15 @@ using namespace std;
 
 #ifdef LINUX
 
+#ifndef __OS2__
 #include <syslog.h>
 #include <libintl.h>
-#include <SDL/SDL.h>
+#define _(string) gettext(string)
+#else
+#define _(string) (string)
+#endif
 
-#define _(string) gettext (string)
+#include <SDL2/SDL.h>
 
 #elif WINDOWS
 
