@@ -105,3 +105,7 @@ The compiled `berusky.exe` must be run from the directory that contains the
 
 GNU General Public License version 2 or later. See source files for the
 full license text.
+
+## Links
+- https://github.com/OS2World/GAME-SDL-PUZZLE-Berusky
+- https://www.anakreon.cz/berusky1.html
