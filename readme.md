@@ -5,6 +5,8 @@ written by Martin Stransky (AnakreoN). This release is an ArcaOS/OS2 port
 that migrates the game from SDL1 to SDL2 and adapts it to run natively on
 ArcaOS 5.1.
 
+![Berusky ScreenShot](/doc/Berusky.png)
+
 ## Changes in version 1.7.2 Release 1 (ArcaOS port)
 
 ### SDL1 to SDL2 migration
